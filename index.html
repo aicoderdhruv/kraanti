@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kraanti: The Peaceful Protest Simulator</title>
+  <meta name="description" content="Run a 30-day peaceful protest against the Ministry of Forms. Swipe, joke, negotiate, drink chai. Violence is not an option.">
+  <meta name="theme-color" content="#ffd23f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✊%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+
+  <!-- TITLE -->
+  <section id="screen-title" class="screen" aria-labelledby="logo">
+    <div class="title-wrap">
+      <p class="kicker">The Peaceful Protest Simulator</p>
+      <h1 id="logo" class="logo">KRAANTI<span aria-hidden="true">✊</span></h1>
+      <p class="pitch">Welcome to <b>Bureaucratia</b>. You have 30 days, one cardboard sign and a Ministry that loves forms. Keep the movement balanced, keep it peaceful, keep the chai flowing.</p>
+
+      <fieldset class="causes">
+        <legend>Pick your demand</legend>
+        <div id="causes"></div>
+        <label class="custom">
+          <span>…or write your own</span>
+          <input id="custom-demand" type="text" maxlength="60" placeholder="e.g. Free bus passes for students" autocomplete="off">
+        </label>
+      </fieldset>
+
+      <button id="btn-start" class="big">Start the movement</button>
+      <p class="fine">Satire. All ministers, committees and pigeons are fictional.<br>Real protest is peaceful protest: know your local rules and look out for each other.</p>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section id="screen-game" class="screen hidden" aria-label="Game">
+    <header class="hud">
+      <div class="hud-top">
+        <span id="day" class="day">Day 1 / 30</span>
+        <button id="btn-quit" class="link" aria-label="Quit to title">✕</button>
+      </div>
+      <div id="meters" class="meters"></div>
+      <p id="ticker" class="ticker" role="status" aria-live="polite"></p>
+    </header>
+
+    <div class="stage">
+      <article id="card" class="card" aria-live="polite">
+        <div class="swipe-label left" id="lbl-left"></div>
+        <div class="swipe-label right" id="lbl-right"></div>
+        <div class="avatar" id="c-avatar" aria-hidden="true"></div>
+        <h2 id="c-name"></h2>
+        <p id="c-text"></p>
+      </article>
+    </div>
+
+    <div class="choices">
+      <button id="btn-left" class="choice left"><i>←</i><span></span></button>
+      <button id="btn-right" class="choice right"><span></span><i>→</i></button>
+    </div>
+    <p class="hint">Swipe the card, tap a button, or use ← → keys</p>
+  </section>
+
+  <!-- END -->
+  <section id="screen-end" class="screen hidden" aria-live="polite">
+    <div class="end-wrap">
+      <p id="end-kicker" class="kicker"></p>
+      <div id="end-emoji" class="end-emoji" aria-hidden="true"></div>
+      <h2 id="end-title"></h2>
+      <p id="end-text"></p>
+      <div class="stats">
+        <div><b id="st-days"></b><span>Days</span></div>
+        <div><b id="st-bal"></b><span>Balance</span></div>
+        <div><b id="st-best"></b><span>Best days</span></div>
+      </div>
+      <p class="fact"><b>Real talk:</b> <span id="end-fact"></span></p>
+      <div class="end-btns">
+        <button id="btn-share" class="big">Share result</button>
+        <button id="btn-again" class="big alt">Play again</button>
+      </div>
+      <p id="share-note" class="fine" role="status"></p>
+    </div>
+  </section>
+
+</main>
+<script src="cards.js"></script>
+<script src="engine.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
