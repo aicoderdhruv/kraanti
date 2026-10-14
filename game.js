@@ -5,7 +5,7 @@
   var screens = { title: $("#screen-title"), game: $("#screen-game"), end: $("#screen-end") };
   var card = $("#card"), btnL = $("#btn-left"), btnR = $("#btn-right");
   var THRESH = 80;
-  var st, demand, busy = false, drag = null, causeIdx = 0, lastEnd = null;
+  var st, camp, demand, busy = false, drag = null, lastEnd = null;
 
   // ---------- storage (best score), always guarded ----------
   function loadBest() { try { return +localStorage.getItem("kraanti.best") || 0; } catch (e) { return 0; } }
@@ -16,33 +16,26 @@
   }
 
   // ---------- title ----------
-  function buildCauses() {
-    var wrap = $("#causes");
-    K.causes.forEach(function (c, i) {
+  function buildCamps() {
+    var wrap = $("#camps");
+    K.campaigns.forEach(function (c) {
       var b = document.createElement("button");
-      b.type = "button"; b.className = "cause";
-      b.setAttribute("aria-pressed", i === causeIdx ? "true" : "false");
-      var e = document.createElement("span"); e.className = "e"; e.textContent = c.emoji;
-      var t = document.createElement("span"); t.textContent = c.title;
+      b.type = "button"; b.className = "camp"; b.dataset.id = c.id;
+      var e = document.createElement("span"); e.className = "ce"; e.textContent = c.emoji; e.setAttribute("aria-hidden", "true");
+      var t = document.createElement("span");
+      var n = document.createElement("b"); n.textContent = c.name;
+      var d = document.createElement("small"); d.textContent = c.blurb;
+      var i = document.createElement("em"); i.textContent = "Inspired by: " + c.inspired;
+      t.appendChild(n); t.appendChild(d); t.appendChild(i);
       b.appendChild(e); b.appendChild(t);
-      b.addEventListener("click", function () {
-        causeIdx = i; $("#custom-demand").value = "";
-        [].forEach.call(wrap.children, function (x, j) { x.setAttribute("aria-pressed", j === i ? "true" : "false"); });
-      });
+      b.addEventListener("click", function () { start(c); });
       wrap.appendChild(b);
     });
-    $("#custom-demand").addEventListener("input", function () {
-      var has = this.value.trim().length > 0;
-      [].forEach.call(wrap.children, function (x, j) { x.setAttribute("aria-pressed", !has && j === causeIdx ? "true" : "false"); });
-    });
-  }
-
-  function currentDemand() {
-    var custom = $("#custom-demand").value.trim();
-    return custom ? custom : K.causes[causeIdx].short;
   }
 
   // ---------- meters ----------
+  function meterInfo(k) { return (camp.meters && camp.meters[k]) || K.meters[k]; }
+
   function buildMeters() {
     var wrap = $("#meters");
     wrap.textContent = "";
@@ -50,8 +43,8 @@
       var d = document.createElement("div");
       d.className = "meter"; d.dataset.k = k;
       d.innerHTML = '<span class="mi"></span><span class="mn"></span><div class="bar" role="meter" aria-valuemin="0" aria-valuemax="100"><i></i></div><b class="dot"></b><b class="delta"></b>';
-      d.querySelector(".mi").textContent = K.meters[k].icon;
-      d.querySelector(".mn").textContent = K.meters[k].name;
+      d.querySelector(".mi").textContent = meterInfo(k).icon;
+      d.querySelector(".mn").textContent = meterInfo(k).name;
       wrap.appendChild(d);
     });
   }
@@ -62,7 +55,7 @@
       el.querySelector(".bar i").style.width = v + "%";
       var bar = el.querySelector(".bar");
       bar.setAttribute("aria-valuenow", v);
-      bar.setAttribute("aria-label", K.meters[k].name + " " + v + " percent");
+      bar.setAttribute("aria-label", meterInfo(k).name + " " + v + " percent");
       el.classList.toggle("warn", v <= 18 || v >= 82);
     });
   }
@@ -186,21 +179,22 @@
   });
 
   // ---------- flow ----------
-  function start() {
-    demand = currentDemand();
-    st = E.newState();
+  function start(c) {
+    camp = c;
+    demand = c.demand;
+    st = E.newState(null, c.id);
     buildMeters();
     show("game");
     $("#ticker").textContent = "";
-    showNews("Organisers gather. Pigeons are watching. “" + demand + "” is the demand.");
+    showNews("Organisers gather. Pigeons are watching. The demand: “" + demand + "”.");
     E.draw(st);
     renderCard();
   }
 
   function finish(key, won) {
-    var end = K.endings[key], days = won ? E.DAYS : st.day - 1, bal = E.balance(st.m), best = loadBest();
+    var end = camp.endings[key] || K.endings[key], days = won ? E.DAYS : st.day - 1, bal = E.balance(st.m), best = loadBest();
     if (days > best) { best = days; saveBest(best); }
-    lastEnd = { title: end.title, days: days, won: won };
+    lastEnd = { title: end.title, days: days, won: won, camp: camp.name };
     $("#end-kicker").textContent = won ? "You made it" : "Movement ended on day " + st.day;
     $("#end-emoji").textContent = end.emoji;
     $("#end-title").textContent = end.title;
@@ -208,6 +202,12 @@
     $("#st-days").textContent = days + "/" + E.DAYS;
     $("#st-bal").textContent = bal + "%";
     $("#st-best").textContent = best;
+    var r = camp.real;
+    $("#real-title").textContent = r.title;
+    $("#real-note").textContent = r.note;
+    var ul = $("#real-points"); ul.textContent = "";
+    r.points.forEach(function (p) { var li = document.createElement("li"); li.textContent = p; ul.appendChild(li); });
+    $("#real").open = true;
     $("#end-fact").textContent = K.facts[Math.floor(Math.random() * K.facts.length)];
     $("#share-note").textContent = "";
     show("end");
@@ -216,7 +216,7 @@
 
   function shareText() {
     var url = location.href.split("#")[0];
-    return "✊ I ran a peaceful protest for " + lastEnd.days + "/" + E.DAYS + " days in KRAANTI and ended up: “" + lastEnd.title + "”. Can you do better? " + url;
+    return "✊ I ran “" + lastEnd.camp + "” for " + lastEnd.days + "/" + E.DAYS + " days in KRAANTI and ended up: “" + lastEnd.title + "”. Can you do better? " + url;
   }
 
   $("#btn-share").addEventListener("click", function () {
@@ -230,11 +230,10 @@
     }
   });
 
-  $("#btn-start").addEventListener("click", start);
   $("#btn-again").addEventListener("click", function () { show("title"); });
   $("#btn-quit").addEventListener("click", function () { show("title"); });
 
-  buildCauses();
+  buildCamps();
   show("title");
 
   // exposed for tests

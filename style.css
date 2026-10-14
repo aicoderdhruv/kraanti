@@ -37,14 +37,19 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: var(--pink); -webkit-text-stroke: 2px var(--ink); text-shadow: 5px 5px 0 var(--ink); transform: rotate(-2deg); }
 .logo span { display: block; font-size: .6em; margin: 4px 0 0; transform: rotate(8deg); -webkit-text-stroke: 0; text-shadow: none; }
 .pitch { margin: 0 auto 14px; max-width: 34ch; font-size: 15px; line-height: 1.4; }
-.causes { border: 3px solid var(--ink); border-radius: 14px; background: var(--card); box-shadow: var(--shadow); padding: 10px 12px 12px; margin: 0 0 18px; text-align: left; }
-.causes legend { font-family: var(--head); font-weight: 900; font-size: 16px; letter-spacing: .06em; text-transform: uppercase; background: var(--yellow); border: 3px solid var(--ink); border-radius: 8px; padding: 1px 10px; }
-#causes { display: grid; gap: 6px; margin-bottom: 8px; }
-.cause { display: flex; gap: 10px; align-items: center; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 10px; background: #fff; text-align: left; font-size: 14px; font-weight: 600; }
-.cause .e { font-size: 20px; }
-.cause[aria-pressed="true"] { background: var(--teal); color: #04201d; box-shadow: 3px 3px 0 var(--ink); transform: translate(-1px, -1px); }
-.custom { display: block; font-size: 12px; font-weight: 700; }
-.custom input { width: 100%; margin-top: 4px; padding: 9px 10px; border: 2px solid var(--ink); border-radius: 10px; font: inherit; font-size: 14px; background: #fff; }
+.camps { border: 3px solid var(--ink); border-radius: 14px; background: var(--card); box-shadow: var(--shadow); padding: 10px 12px 12px; margin: 0 0 8px; text-align: left; }
+.camps legend { font-family: var(--head); font-weight: 900; font-size: 16px; letter-spacing: .06em; text-transform: uppercase; background: var(--yellow); border: 3px solid var(--ink); border-radius: 8px; padding: 1px 10px; }
+#camps { display: grid; gap: 10px; }
+.camp { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; width: 100%; padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #fff; text-align: left; box-shadow: 3px 3px 0 var(--ink); }
+.camp:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+.camp .ce { font-size: 36px; line-height: 1; text-align: center; }
+.camp b { display: block; font-family: var(--head); font-weight: 900; font-size: 20px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.05; }
+.camp small { display: block; margin-top: 3px; font-size: 12.5px; line-height: 1.35; font-weight: 500; }
+.camp em { display: inline-block; margin-top: 5px; padding: 1px 7px; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; background: var(--yellow); border: 2px solid var(--ink); border-radius: 6px; }
+.camp[data-id="farm"] { background: #e9f9d6; }
+.camp[data-id="neet"] { background: #ffe9c7; }
+.camp[data-id="vote"] { background: #dfe8ff; }
+.fine.tight { margin-top: 6px; }
 .big { display: inline-block; border: 3px solid var(--ink); border-radius: 14px; background: var(--yellow); box-shadow: var(--shadow); padding: 12px 22px; font-family: var(--head); font-weight: 900; font-size: 22px; letter-spacing: .05em; text-transform: uppercase; }
 .big:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
 .big.alt { background: #fff; }
@@ -75,7 +80,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* ---------- Card ---------- */
 .stage { flex: 1; display: grid; place-items: center; min-height: 0; padding: 14px 0 6px; perspective: 800px; }
-.card { position: relative; width: min(100%, 340px); border: 3px solid var(--ink); border-radius: 22px; background: var(--card); box-shadow: 7px 7px 0 var(--ink); padding: 20px 18px 22px; text-align: center; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab; will-change: transform; }
+.card { position: relative; width: min(100%, 340px); max-height: 100%; overflow-y: auto; border: 3px solid var(--ink); border-radius: 22px; background: var(--card); box-shadow: 7px 7px 0 var(--ink); padding: 20px 18px 22px; text-align: center; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab; will-change: transform; }
 .card.dragging { cursor: grabbing; transition: none; }
 .card.snap { transition: transform .22s cubic-bezier(.2, .9, .3, 1.2); }
 .card.out { transition: transform .26s ease-in, opacity .26s ease-in; opacity: 0; }
@@ -107,6 +112,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .stats div { border: 3px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 3px 3px 0 var(--ink); padding: 6px 12px; min-width: 84px; }
 .stats b { display: block; font-family: var(--head); font-size: 26px; font-weight: 900; }
 .stats span { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.real { max-width: 40ch; margin: 0 auto 12px; text-align: left; background: var(--card); border: 3px solid var(--ink); border-radius: 12px; box-shadow: 3px 3px 0 var(--ink); padding: 8px 12px; font-size: 13px; line-height: 1.4; }
+.real summary { font-family: var(--head); font-weight: 900; text-transform: uppercase; letter-spacing: .04em; font-size: 15px; cursor: pointer; }
+.real ul { margin: 8px 0 4px; padding-left: 18px; }
+.real li { margin: 0 0 6px; }
+.real-note { margin: 6px 0 2px; font-size: 11.5px; opacity: .8; font-style: italic; }
 .fact { max-width: 38ch; margin: 0 auto 16px; font-size: 13px; line-height: 1.4; background: var(--yellow); border: 2px dashed var(--ink); border-radius: 10px; padding: 8px 12px; }
 .end-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 .end-btns .big { font-size: 18px; padding: 10px 16px; }

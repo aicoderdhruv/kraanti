@@ -16,14 +16,14 @@
   function clamp(v) { return Math.max(0, Math.min(100, v)); }
   function pick(arr, rng) { return arr[Math.floor(rng() * arr.length)]; }
 
-  function newState(rng) {
-    return { day: 1, m: { c: 50, s: 50, k: 50, t: 50 }, seen: {}, last: {}, cur: null, rng: rng || Math.random };
+  function newState(rng, camp) {
+    return { camp: camp || null, day: 1, m: { c: 50, s: 50, k: 50, t: 50 }, seen: {}, last: {}, cur: null, rng: rng || Math.random };
   }
 
   function draw(st) {
-    var cards = K.cards, card;
+    var cards = K.cards.filter(function (c) { return !c.camps || c.camps.indexOf(st.camp) >= 0; }), card;
     if (st.day === 1) {
-      card = cards.filter(function (c) { return c.tutorial; })[0];
+      card = cards.filter(function (c) { return c.tutorial; })[0]; // each campaign has exactly one
     } else {
       var rescue = cards.filter(function (c) {
         return c.when && c.when(st.m) && st.day - (st.last[c.id] || -99) >= COOLDOWN;

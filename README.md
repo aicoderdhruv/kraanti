@@ -6,13 +6,32 @@ young players with a feel for how nonviolent movements actually work.
 
 **Play it:** open `index.html` in any browser (no build, no dependencies). Works on phones.
 
+## Three movements, based on real protests
+
+You pick one of three campaigns. Each is a satirical, fictionalised take on a real protest in India,
+played in the fictional Republic of Bureaucratia (real events, fictional names), with its own deck of
+cards, meter labels, endings and a **"The real story"** panel on the end screen.
+
+| | Campaign | Inspired by | Flavour |
+| --- | --- | --- | --- |
+| 🚜 | **The Tractor March** | Farmers' protest, 2020-21 | Barricades, winter, rounds of talks, a very large kitchen (meters: Kisans, Langar) |
+| 🍜 | **The Paper Leak** | NEET-UG protests, 2024 | A leaked paper, grace-mark flip-flops, a lane with room for four pigeons (meters: Aspirants, Maggi) |
+| 🗳️ | **The Voter List** | "Vote chori" / voter-roll (SIR) protests, 2025-26 | Forms, documents, viral posts and "Show Your Math" (meters: Voters, Chai) |
+
+**Accuracy and neutrality rules**
+
+- The satire targets *systems and processes* (paperwork, spin, committees, viral rumours), never real people, parties, religions or communities. Nobody real is named in a card.
+- The "real story" panels are plain, dated and hedged ("reports say", "it said"). Where a claim is disputed, the panel says so.
+- **The Voter List is live and politically contested.** The game takes no side on whether anything was wrong. It satirises hard-to-prove paperwork *and* unverified viral claims from every direction, and rewards fact-checking, documentation and staying calm.
+- The farm and NEET panels also avoid casualty numbers and blame; sources disagree.
+- Please re-verify the panels before any public launch. They were written from news reports in Oct 2026 (Deccan Herald, The News Minute, DT Next, Scroll, ThePrint and others) and the 2025-26 story is still moving.
+
 ## The game in 30 seconds
 
-- Pick a demand (or write your own) and survive **30 days**.
+- Pick a movement and survive **30 days**.
 - Each day a card shows up. Swipe left or right.
-- Keep four meters balanced: 👥 **Crowd**, 📣 **Public Love**, 🕊️ **Calm**, ☕ **Chai**.
-- Too little *or* too much of any meter ends the movement, each with its own joke ending
-  (*Just You and a Pigeon*, *Fire Marshal Says No*, *Sold Out*, *Accidentally Started a Yoga Retreat*…).
+- Keep four meters balanced: 👥 **Crowd**, 📣 **Public Love**, 🕊️ **Calm**, and the campaign's supply meter (☕ Chai / 🍲 Langar / 🍜 Maggi).
+- Too little *or* too much of any meter ends the movement, each with its own joke ending.
 - Violence is never the winning move. The "tempting" options tank Calm and cost you the story.
 
 ## Design pillars
@@ -27,7 +46,8 @@ young players with a feel for how nonviolent movements actually work.
 
 | File | What it is |
 | --- | --- |
-| `cards.js` | **All the content**: demands, 44 cards, 11 endings, "Real talk" facts. Easiest place to contribute. |
+| `cards.js` | Shared cards (work in every campaign), default endings, "Real talk" facts. |
+| `campaigns.js` | **The three movements**: meta, meter labels, endings, "real story" panels and each campaign's own cards. |
 | `engine.js` | Pure game rules (draw, apply, endings, balance score). No DOM. |
 | `game.js` | UI: screens, swipe, meters, share. |
 | `style.css` | Protest-poster look. |
@@ -49,17 +69,19 @@ young players with a feel for how nonviolent movements actually work.
 - The `news` line is the punchline. It appears in the breaking-news ticker after the choice.
 - Aim at institutions and situations, not individuals. No real politicians, parties or communities.
 - Rescue cards (`when: m => m.t < 28`) appear when a meter drifts to an extreme.
+- A card with `camps: ["farm"]` only appears in that campaign; no `camps` means it appears in all of them.
 
 ## Balance
 
 Difficulty is tuned with a headless simulation against `engine.js` (random, "mostly sensible" and
-greedy players). Current target: random play wins ~14%, a mostly-sensible player ~65%, an optimal
-one ~90%. Knobs live in `cfg` at the top of `engine.js`. If you add cards, re-check the drift of each meter
+greedy players), per campaign. Current results: random play wins 9-14%, a mostly-sensible player 54-71%, an optimal
+one 75-92%. Knobs live in `cfg` at the top of `engine.js`. If you add cards, re-check the drift of each meter
 (mean effect per choice should stay near zero; passive daily drift compensates for the rest).
 
 ## Roadmap ideas
 
 - 🔊 Sound and haptics (kazoo, megaphone feedback, the sigh of a Ministry clerk)
+- ➕ More campaigns (Agnipath, CAA/Shaheen Bagh, Ladakh...) via the same `campaigns.js` format
 - 🌐 Hinglish / Hindi / regional language packs; community-submitted cards via PR
 - 📅 "Card of the day" daily challenge with one shared seed and a leaderboard-free share grid
 - 🖼️ Shareable ending images (poster-style) for Instagram/WhatsApp stories

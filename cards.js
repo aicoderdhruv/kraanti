@@ -15,21 +15,7 @@
     t: { icon: "☕", name: "Chai" },
   };
 
-  K.causes = [
-    { emoji: "📚", title: "Exams that test thinking, not cramming", short: "EXAMS THAT TEST THINKING, NOT CRAMMING" },
-    { emoji: "💼", title: "Entry-level jobs that don't need 5 years' experience", short: "ENTRY-LEVEL MEANS ENTRY-LEVEL" },
-    { emoji: "📶", title: "Wi-Fi that actually works in the library", short: "WI-FI THAT ACTUALLY WI-FIS" },
-    { emoji: "🌳", title: "Clean air and potholes fixed", short: "CLEAN AIR, FIXED POTHOLES" },
-  ];
-
   K.cards = [
-    {
-      id: "tutorial", tutorial: true, who: "🧑‍🎓", name: "Pia, Head Volunteer",
-      text: "Welcome, Organiser! You have 30 days to make the Ministry hear: “{demand}”. Swipe RIGHT for yes, LEFT for no. Keep Crowd, Public Love, Calm and Chai balanced. Too little OR too much of anything ends the movement.",
-      L: { label: "Wait, too MUCH?", fx: { k: 5 }, news: "Pia: “Yes. Too much chai is a real thing.”" },
-      R: { label: "Let's go!", fx: { c: 5 }, news: "First sign goes up. Spelling checked twice." },
-    },
-
     // ---------- Bureaucracy & the Ministry ----------
     {
       id: "forms", who: "📋", name: "Clerk Stampwala",
@@ -50,7 +36,7 @@
       R: { label: "Publish a polite fact sheet", fx: { s: 8, k: 5, c: -5, t: -6 }, news: "Fact sheet gets 4M views and one angry email from the Minister's cousin." },
     },
     {
-      id: "phone", who: "📱", name: "Spokesperson Dr. Spin",
+      id: "phone", camps: ["neet", "vote"], who: "📱", name: "Spokesperson Dr. Spin",
       text: "Official statement: “Youth have smartphones, therefore have no problems.”",
       L: { label: "Reply: “My phone is at 2%, like my hope.”", fx: { s: 10, c: 6, k: -6, t: -4 }, news: "Reply gets more likes than the Ministry's entire year." },
       R: { label: "Host a phones-down picnic", fx: { c: -6, k: 8, t: 6, s: 4 }, news: "Everyone talks to each other. Unsettling but nice." },
@@ -80,7 +66,7 @@
       R: { label: "Frame it, gift it at the meeting", fx: { s: 8, k: 5, c: 3, t: -6 }, news: "Memo is framed. Ministry is, too." },
     },
     {
-      id: "app", who: "💻", name: "Youth Grievance App",
+      id: "app", camps: ["neet", "vote"], who: "💻", name: "Youth Grievance App",
       text: "The Ministry launches the Youth Grievance App. Step 1: solve 14 CAPTCHAs. Step 2: app crashes.",
       L: { label: "Try it. Document the crashing.", fx: { s: 9, k: 4, t: -9, c: -2 }, news: "“Select all traffic lights” becomes a protest chant." },
       R: { label: "Hand-deliver a paper petition", fx: { s: 7, c: 7, t: -6 }, news: "Paper beats pixels. Again." },
@@ -112,7 +98,7 @@
       R: { label: "Order 50 more, on credit", fx: { c: 10, t: -10, s: 4, k: -3 }, news: "Fifty megaphones. Zero listening." },
     },
     {
-      id: "chaiuncle", who: "☕", name: "Chai Uncle",
+      id: "chaiuncle", camps: ["neet", "vote"], who: "☕", name: "Chai Uncle",
       text: "Free chai for everyone today! Pay me back when the Ministry listens.",
       L: { label: "Pay him fairly. Fair trade.", fx: { t: 8, s: 8, c: -3, k: 3 }, news: "Chai Uncle: “Honest protesters? Print that.”" },
       R: { label: "Free chai? YES.", fx: { t: 16, c: 7, s: -3 }, news: "Chai queue longer than the speeches queue." },
@@ -184,7 +170,7 @@
       R: { label: "Share her laddoos with everyone", fx: { t: 14, c: 5, k: -3 }, news: "Laddoos vanish in 11 minutes. Peace is delicious." },
     },
     {
-      id: "shop", who: "🏪", name: "Shopkeeper Mehta",
+      id: "shop", camps: ["neet", "vote"], who: "🏪", name: "Shopkeeper Mehta",
       text: "Your crowd is blocking my shop entrance. Nothing personal. (A little personal.)",
       L: { label: "Move 10 metres, apologise", fx: { k: 6, s: 8, c: -5 }, news: "Shopkeeper joins in at lunch. Brings samosas." },
       R: { label: "Buy all his samosas as an apology", fx: { t: 11, s: 7, k: -2, c: 0 }, news: "Sold out by 2 PM. Shopkeeper: “Come back tomorrow.”" },
@@ -220,7 +206,7 @@
       R: { label: "Keep going, we're tough", fx: { c: 8, k: -10, t: -6 }, news: "Tough, yes. Also sunburnt." },
     },
     {
-      id: "mom", who: "📞", name: "Mom (calling, 14th time)",
+      id: "mom", camps: ["neet", "vote"], who: "📞", name: "Mom (calling, 14th time)",
       text: "Beta, I saw you on TV. Did you eat?",
       L: { label: "Pick up: “Yes Mom, I'm fine.”", fx: { t: 12, c: -4, k: 4 }, news: "Mom now has 40 followers. She posts in all caps." },
       R: { label: "Let it ring. Revolution first.", fx: { c: 4, k: -4, t: -5 }, news: "Mom has joined the protest. You can't hide." },
@@ -232,7 +218,7 @@
       R: { label: "Hold up a sign: “HI MINISTRY”", fx: { s: 9, c: 6, k: -4, t: -4 }, news: "Sign seen by Ministry. Acknowledged by nobody." },
     },
     {
-      id: "students", who: "🎓", name: "Student Union",
+      id: "students", camps: ["neet", "vote"], who: "🎓", name: "Student Union",
       text: "Tomorrow is the mid-semester exam. Half of us are protesting, half are crying.",
       L: { label: "Rest day: study circles in the park", fx: { c: -8, t: 9, s: 6, k: 4 }, news: "Study circles double as a sit-in. Quietly effective." },
       R: { label: "Study-protest hybrid: “Civics Chapter 4”", fx: { c: 8, s: 7, t: -9 }, news: "Chapter 4 is about this exact thing. Spooky." },
@@ -245,12 +231,6 @@
     },
 
     // ---------- Rescue cards (appear when a meter hits an extreme) ----------
-    {
-      id: "r_chai_low", when: function (m) { return m.t < 28; }, who: "☕", name: "Chai Uncle",
-      text: "Emergency! We're out of milk. Morale is looking... decaffeinated.",
-      L: { label: "Switch to lemon tea", fx: { t: 10, k: -3, s: 3, c: -2 }, news: "Lemon tea: sour, but sincere." },
-      R: { label: "Crowdfund 500 litres of milk", fx: { t: 20, s: 3, c: -5 }, news: "Crowdfunding hits goal in 4 minutes. Milk arrives in 4 hours." },
-    },
     {
       id: "r_calm_low", when: function (m) { return m.k < 28; }, who: "😬", name: "Pia, Head Volunteer",
       text: "Everyone is on edge. Someone just said “hmm” aggressively.",
@@ -274,12 +254,6 @@
       text: "Venue capacity is 500. Current crowd: “yes”.",
       L: { label: "Split into three groups", fx: { c: -14, k: 4, s: 4 }, news: "Three groups, three perspectives, one very smooth day." },
       R: { label: "We're just standing close. Cozy.", fx: { c: 4, k: -10, s: -3 }, news: "Cozy turns to squish. Squish turns to “that's enough.”" },
-    },
-    {
-      id: "r_chai_high", when: function (m) { return m.t > 72; }, who: "☕", name: "Chai Uncle",
-      text: "Folks are vibrating. Someone is talking at 2x speed.",
-      L: { label: "Donate extra chai to hospital volunteers", fx: { t: -14, s: 8, k: 3 }, news: "Hospital volunteers receive chai and a moment of calm." },
-      R: { label: "Chai-drinking contest", fx: { t: -8, c: 7, k: -6 }, news: "Winner: 11 cups. Prize: a nap." },
     },
     {
       id: "r_love_high", when: function (m) { return m.s > 72; }, who: "🌟", name: "PR Agency",

@@ -17,18 +17,13 @@
     <div class="title-wrap">
       <p class="kicker">The Peaceful Protest Simulator</p>
       <h1 id="logo" class="logo">KRAANTI<span aria-hidden="true">✊</span></h1>
-      <p class="pitch">Welcome to <b>Bureaucratia</b>. You have 30 days, one cardboard sign and a Ministry that loves forms. Keep the movement balanced, keep it peaceful, keep the chai flowing.</p>
+      <p class="pitch">Welcome to <b>Bureaucratia</b>. You have 30 days, one cardboard sign and a Ministry that loves forms. Keep the movement balanced and peaceful.</p>
 
-      <fieldset class="causes">
-        <legend>Pick your demand</legend>
-        <div id="causes"></div>
-        <label class="custom">
-          <span>…or write your own</span>
-          <input id="custom-demand" type="text" maxlength="60" placeholder="e.g. Free bus passes for students" autocomplete="off">
-        </label>
+      <fieldset class="camps">
+        <legend>Pick your movement</legend>
+        <div id="camps"></div>
       </fieldset>
-
-      <button id="btn-start" class="big">Start the movement</button>
+      <p class="fine tight">Real events, fictional names. Each movement is a satirical take on a real protest in India.</p>
       <p class="fine">Satire. All ministers, committees and pigeons are fictional.<br>Real protest is peaceful protest: know your local rules and look out for each other.</p>
     </div>
   </section>
@@ -73,6 +68,11 @@
         <div><b id="st-bal"></b><span>Balance</span></div>
         <div><b id="st-best"></b><span>Best days</span></div>
       </div>
+      <details id="real" class="real" open>
+        <summary id="real-title"></summary>
+        <ul id="real-points"></ul>
+        <p id="real-note" class="real-note"></p>
+      </details>
       <p class="fact"><b>Real talk:</b> <span id="end-fact"></span></p>
       <div class="end-btns">
         <button id="btn-share" class="big">Share result</button>
@@ -84,6 +84,7 @@
 
 </main>
 <script src="cards.js"></script>
+<script src="campaigns.js"></script>
 <script src="engine.js"></script>
 <script src="game.js"></script>
 </body>
