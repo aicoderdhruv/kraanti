@@ -6,6 +6,21 @@ young players with a feel for how nonviolent movements actually work.
 
 **Play it:** open `index.html` in any browser (no build, no dependencies). Works on phones.
 
+## Two ways to play
+
+**1. Be the protestor (`index.html`, 2D arcade).** Pick a person from a real protest and play a short level (about a minute each).
+
+| Persona | Level | How it plays |
+| --- | --- | --- |
+| 🚜 The Farmer | Delhi Chalo | Lane-driving up a blockaded highway. Find the gap in each barricade, dodge the water cannon, collect langar and fellow farmers, and tap ☕ near a constable to offer tea. **Ramming a barricade is possible, and the fastest way to lose** (Calm collapses, headline: "CHAOS ON HIGHWAY"). |
+| 🧑‍🎓 The Aspirant | The Paper Chase | Side-scrolling run. Tap to jump. Grab real pages (white, ticked), dodge the yellow "FWD!!" fake forwards, "Form 27-B" hurdles and pigeons, and reach the court with enough evidence. |
+| 🗳️ The Volunteer | The Help Desk | Rush-hour queue. Tap the right fix for each citizen (typo, new address, duplicate, missing name, all correct) and fact-check every viral post instead of sharing it. |
+
+**2. Run the movement (`cards.html`, strategy swipe-cards).** Balance Crowd, Public Love, Calm and supplies across 30 days. See below.
+
+Each level ends with the matching "real story" panel. The levels are tuned with scripted bots (`window.__arcade`
+exposes the running level): an idle player usually loses, a competent one wins.
+
 ## Three movements, based on real protests
 
 You pick one of three campaigns. Each is a satirical, fictionalised take on a real protest in India,
@@ -46,10 +61,10 @@ cards, meter labels, endings and a **"The real story"** panel on the end screen.
 
 | File | What it is |
 | --- | --- |
+| `index.html`, `arcade.js`, `arcade.css` | The 2D arcade game: menu, shared canvas helpers, and the three levels. |
+| `cards.html`, `game.js`, `engine.js` | The swipe-card strategy mode. |
 | `cards.js` | Shared cards (work in every campaign), default endings, "Real talk" facts. |
 | `campaigns.js` | **The three movements**: meta, meter labels, endings, "real story" panels and each campaign's own cards. |
-| `engine.js` | Pure game rules (draw, apply, endings, balance score). No DOM. |
-| `game.js` | UI: screens, swipe, meters, share. |
 | `style.css` | Protest-poster look. |
 
 ## Writing a card
@@ -81,6 +96,7 @@ one 75-92%. Knobs live in `cfg` at the top of `engine.js`. If you add cards, re-
 ## Roadmap ideas
 
 - 🔊 Sound and haptics (kazoo, megaphone feedback, the sigh of a Ministry clerk)
+- 🎮 More personas and levels (the water-cannon moment: switch off the cannon, offer the tea), co-op, pixel-art sprites replacing emoji
 - ➕ More campaigns (Agnipath, CAA/Shaheen Bagh, Ladakh...) via the same `campaigns.js` format
 - 🌐 Hinglish / Hindi / regional language packs; community-submitted cards via PR
 - 📅 "Card of the day" daily challenge with one shared seed and a leaderboard-free share grid

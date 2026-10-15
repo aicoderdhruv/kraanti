@@ -2,58 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Kraanti: The Peaceful Protest Simulator</title>
-  <meta name="description" content="Run a 30-day peaceful protest against the Ministry of Forms. Swipe, joke, negotiate, drink chai. Violence is not an option.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Kraanti</title>
+  <meta name="description" content="Be the protestor. Drive the tractor, chase the paper, run the help desk. A satirical, peaceful-protest game based on real protests in India.">
   <meta name="theme-color" content="#ffd23f">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✊%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="arcade.css">
 </head>
 <body>
 <main id="app">
 
-  <!-- TITLE -->
-  <section id="screen-title" class="screen" aria-labelledby="logo">
+  <!-- MENU -->
+  <section id="screen-menu" class="screen" aria-labelledby="logo">
     <div class="title-wrap">
-      <p class="kicker">The Peaceful Protest Simulator</p>
+      <p class="kicker">The Peaceful Protest Game</p>
       <h1 id="logo" class="logo">KRAANTI<span aria-hidden="true">✊</span></h1>
-      <p class="pitch">Welcome to <b>Bureaucratia</b>. You have 30 days, one cardboard sign and a Ministry that loves forms. Keep the movement balanced and peaceful.</p>
+      <p class="pitch">You are the protestor. Pick a person from a real protest and get through the day without losing your cool.</p>
 
       <fieldset class="camps">
-        <legend>Pick your movement</legend>
-        <div id="camps"></div>
+        <legend>Pick your protestor</legend>
+        <div id="personas"></div>
       </fieldset>
-      <p class="fine tight">Real events, fictional names. Each movement is a satirical take on a real protest in India.</p>
+      <p class="fine tight">Real events, fictional names. Each level is a satirical take on a real protest in India.</p>
+      <p class="fine"><a href="cards.html">Prefer strategy? Play the card game →</a></p>
       <p class="fine">Satire. All ministers, committees and pigeons are fictional.<br>Real protest is peaceful protest: know your local rules and look out for each other.</p>
     </div>
   </section>
 
-  <!-- GAME -->
-  <section id="screen-game" class="screen hidden" aria-label="Game">
-    <header class="hud">
-      <div class="hud-top">
-        <span id="day" class="day">Day 1 / 30</span>
-        <button id="btn-quit" class="link" aria-label="Quit to title">✕</button>
-      </div>
-      <div id="meters" class="meters"></div>
-      <p id="ticker" class="ticker" role="status" aria-live="polite"></p>
-    </header>
-
-    <div class="stage">
-      <article id="card" class="card" aria-live="polite">
-        <div class="swipe-label left" id="lbl-left"></div>
-        <div class="swipe-label right" id="lbl-right"></div>
-        <div class="avatar" id="c-avatar" aria-hidden="true"></div>
-        <h2 id="c-name"></h2>
-        <p id="c-text"></p>
-      </article>
-    </div>
-
-    <div class="choices">
-      <button id="btn-left" class="choice left"><i>←</i><span></span></button>
-      <button id="btn-right" class="choice right"><span></span><i>→</i></button>
-    </div>
-    <p class="hint">Swipe the card, tap a button, or use ← → keys</p>
+  <!-- PLAY -->
+  <section id="screen-play" class="screen hidden" aria-label="Game">
+    <div id="stage"><canvas id="cv" aria-label="Game area"></canvas></div>
+    <button id="btn-quit" class="quit" aria-label="Quit to menu">✕</button>
   </section>
 
   <!-- END -->
@@ -63,29 +43,23 @@
       <div id="end-emoji" class="end-emoji" aria-hidden="true"></div>
       <h2 id="end-title"></h2>
       <p id="end-text"></p>
-      <div class="stats">
-        <div><b id="st-days"></b><span>Days</span></div>
-        <div><b id="st-bal"></b><span>Balance</span></div>
-        <div><b id="st-best"></b><span>Best days</span></div>
-      </div>
+      <div id="end-stats" class="stats"></div>
       <details id="real" class="real" open>
         <summary id="real-title"></summary>
         <ul id="real-points"></ul>
         <p id="real-note" class="real-note"></p>
       </details>
-      <p class="fact"><b>Real talk:</b> <span id="end-fact"></span></p>
       <div class="end-btns">
-        <button id="btn-share" class="big">Share result</button>
-        <button id="btn-again" class="big alt">Play again</button>
+        <button id="btn-retry" class="big">Try again</button>
+        <button id="btn-menu" class="big alt">Pick another</button>
       </div>
-      <p id="share-note" class="fine" role="status"></p>
+      <p id="share-row" class="fine"><button id="btn-share" class="link-btn">Share result</button> <span id="share-note" role="status"></span></p>
     </div>
   </section>
 
 </main>
 <script src="cards.js"></script>
 <script src="campaigns.js"></script>
-<script src="engine.js"></script>
-<script src="game.js"></script>
+<script src="arcade.js"></script>
 </body>
 </html>

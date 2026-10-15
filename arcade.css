@@ -1,0 +1,10 @@
+/* Kraanti arcade: extra styles for the 2D game. Shares tokens and base styles with style.css. */
+#stage { flex: 1; min-height: 0; display: grid; place-items: center; }
+#cv { display: block; border: 3px solid var(--ink); border-radius: 16px; box-shadow: var(--shadow); background: var(--paper); touch-action: none; user-select: none; -webkit-user-select: none; }
+#screen-play { padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+.quit { position: absolute; top: calc(14px + env(safe-area-inset-top)); right: 14px; width: 34px; height: 34px; border: 3px solid var(--ink); border-radius: 50%; background: #fff; font-weight: 900; line-height: 1; box-shadow: 2px 2px 0 var(--ink); z-index: 2; }
+.camp[data-id="farm"] .ce, .camp[data-id="neet"] .ce, .camp[data-id="vote"] .ce { font-size: 34px; }
+.camp small b { display: inline; font: inherit; font-weight: 800; text-transform: none; letter-spacing: 0; }
+.link-btn { background: none; border: 0; padding: 0; font: inherit; font-weight: 800; text-decoration: underline; cursor: pointer; }
+.fine a { color: inherit; font-weight: 800; }
+.stats { flex-wrap: wrap; }
